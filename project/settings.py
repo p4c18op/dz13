@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -67,6 +68,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'project.urls'
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 TEMPLATES = [
     {
@@ -202,26 +207,23 @@ CACHES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'style': '{',
     'formatters': {
         'new1': {
-            'format': '(asctime) (levelname) (message)',
-            'datetime': '%H:%M:%S',
-            'style': '{',
+            'format': '%(asctime)s %(levelname)s %(message)s',
+            'datefmt': "%d/%m/%Y %H:%M:%S",
         },
         'new2': {
-            'format': '(asctime) (levelname) (module) (message)',
-            'datetime': '%H:%M:%S',
-            'style' : '{',
+            'format': '%(asctime)s %(levelname)s %(module)s %(message)s',
+            'datefmt': "%d/%m/%Y %H:%M:%S",
         },
         'new3': {
-            'format': '(asctime) (levelname) (message) (pathname) (exc_info)',
-            'datetime': '%H:%M:%S',
-            'style' : '{',
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s %(exc_info)s',
+            'datefmt': "%d/%m/%Y %H:%M:%S",
         },
         'new4': {
-            'format': '(asctime) (levelname) (message) (pathname)',
-            'datetime': '%H:%M:%S',
-            'style' : '{',
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s',
+            'datefmt': "%d/%m/%Y %H:%M:%S",
         },
     },
 
@@ -288,3 +290,5 @@ LOGGING = {
         }
     }
 }
+
+USE_I18N = True
