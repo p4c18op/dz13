@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import New, News, Subscription
 from .forms import NewForm
@@ -115,7 +117,6 @@ class MobileOrFullMiddleware:
             prefix = "full/"
         response.template_name = prefix + response.template_name
         return response
-
 
 class Index(View):
     def get(self, request):
